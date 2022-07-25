@@ -1,43 +1,39 @@
-﻿/*Задача 25: Напишите цикл, который принимает на вход два числа (A и B) и возводит число A в натуральную степень B.
-3, 5 -> 243 (3⁵)
-2, 4 -> 16*/
+﻿/*Задача 27: Напишите программу, которая принимает на вход число и выдаёт сумму цифр в числе.
 
-Console.Write("Введите число А: ");
-string a = Console.ReadLine();
+452 -> 11
 
-Console.Write("Введите натуральное число B (от 1): ");
-string b = Console.ReadLine();
+82 -> 10
 
-double degreeResult;
+9012 -> 12*/
 
-double RaiseToADegree(double number, int degreeOfNumber)
+Console.Write("Введите число: ");
+string numbers = Console.ReadLine();
+
+int SumNumbersInNumber(int num)
 {
-    double degree = 1;
-
-    for (int i = 0; i < degreeOfNumber; i++)
+    int sum = 0;
+    while (num != 0)
     {
-        degree *= number;
+        sum = sum + (num % 10);
+        num = num / 10;
     }
-    return degree;
+    return sum;
 }
 
-
-void ExceptionHandling(string enterA, string enterB)
+void ExceptionHandling(string enterA)
 {
-    bool yesDouble = double.TryParse(enterA, out double resultNumber);
-    bool yesInt = int.TryParse(enterB, out int result);
+    bool yesInt = int.TryParse(enterA, out int result);
 
-    if (yesInt && yesDouble && result > 0)
+    if (yesInt && result >= 0) 
     {
-        degreeResult = RaiseToADegree(resultNumber, result);
-        Console.WriteLine("{0} в степени {1} = {2}",
-                          resultNumber, result, degreeResult);
+        int sumResult = SumNumbersInNumber(result);
+        Console.WriteLine("Сумма цифр числа {0} = {1}",
+                          result, sumResult);
     }
-    else 
+    else
     {
-        Console.WriteLine("{0}, {1} -> Некорректный ввод!", a, b);
+        Console.WriteLine("{0} -> Некорректный ввод!", numbers);
     }
 }
 
-ExceptionHandling(a, b);
-
+ExceptionHandling(numbers);
